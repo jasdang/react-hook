@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
 require("eslint/package.json"); 
@@ -6,8 +6,11 @@ var eslintPluginReactHooks = require("eslint-plugin-react-hooks")
 
 function App() {
   const [count, setCount] = useState(0);
-  const [age, setAge] = useState(28);
-  const [fruit, setFruit] = useState('banana');
+
+  useEffect(() => {
+    document.title = `You clicked ${count} times`;
+  })
+
   return (
   <div>
     <p>You clicked {count} times</p>
