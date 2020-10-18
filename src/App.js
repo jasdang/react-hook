@@ -1,23 +1,26 @@
-import React, {useState, useEffect} from 'react';
-import logo from './logo.svg';
-import './App.css';
-require("eslint/package.json"); 
-var eslintPluginReactHooks = require("eslint-plugin-react-hooks")
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    document.title = `You clicked ${count} times`;
-  })
+  const [date, setDate] = React.useState(new Date());
+  React.useEffect(() => {
+    const timer = setInterval(() => setDate(new Date()), 1000);
+    return () => {
+      clearInterval(timer);
+    };
+  }, [date]);
 
   return (
-  <div>
-    <p>You clicked {count} times</p>
-    <button onClick={() => setCount(count + 1)}>Click me</button>
-    {/* unlike this.setState in a class, updating a state variable always replaces it instead of merging it. */}
-  </div>
-    );
+    <div>
+      <h1>Hello, world!</h1>
+      <h2>It is {date.toLocaleTimeString()}.</h2>
+    </div>
+  );
 }
+function tick() {
+  ReactDOM.render(<App />, document.getElementById('root'));
+}
+
+setInterval(tick, 1000);
 
 export default App;
