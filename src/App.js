@@ -1,26 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
-function App() {
-  const [date, setDate] = React.useState(new Date());
-  React.useEffect(() => {
-    const timer = setInterval(() => setDate(new Date()), 1000);
-    return () => {
-      clearInterval(timer);
-    };
-  }, [date]);
+class App extends React.Component {
+  render() {
+    return <Toolbar theme='dark' />;
+  }
+}
 
+function Toolbar(props) {
   return (
     <div>
-      <h1>Hello, world!</h1>
-      <h2>It is {date.toLocaleTimeString()}.</h2>
+      <ThemedButton theme={props.theme} />
     </div>
   );
 }
-function tick() {
-  ReactDOM.render(<App />, document.getElementById('root'));
-}
 
-setInterval(tick, 1000);
+class ThemedButton extends React.Component {
+  render() {
+    return <button theme={this.props.theme}> Click me </button>;
+  }
+}
 
 export default App;
