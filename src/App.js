@@ -1,22 +1,29 @@
 import React from 'react';
 
+const ThemeContext = React.createContext('light');
+
 class App extends React.Component {
   render() {
-    return <Toolbar theme='dark' />;
+    return (
+      <ThemeContext.Provider value='dark'>
+        <Toolbar />;
+      </ThemeContext.Provider>
+    );
   }
 }
 
-function Toolbar(props) {
+function Toolbar() {
   return (
     <div>
-      <ThemedButton theme={props.theme} />
+      <ThemedButton />
     </div>
   );
 }
 
 class ThemedButton extends React.Component {
+  static contextType = ThemeContext;
   render() {
-    return <button theme={this.props.theme}> Click me </button>;
+    return <button theme={this.context}> Click me </button>;
   }
 }
 
